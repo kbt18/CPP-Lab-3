@@ -12,8 +12,5 @@ $(EXE): $(OBJ)
 -include $(OBJ:.o=.d)
 
 .PHONY: clean
-#clean:
-#	rm -f $(OBJ) $(EXE) $(OBJ:.o=.d)
-
 clean:
-		rm -f *o enigma
+	rm -f $(OBJ) $(EXE) $(OBJ:.o=.d)
