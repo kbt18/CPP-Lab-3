@@ -72,7 +72,10 @@ namespace chess {
   }
 
   void ChessBoard::movePiece(const char* source, const char* destination) {
-    
+    board_[stringToRank(destination)][stringToFile(destination)] =
+    board_[stringToRank(source)][stringToFile(source)];
+    board_[stringToRank(source)][stringToFile(source)] = NULL;
+    board_[stringToRank(destination)][stringToFile(destination)]->makeMove(destination);
   }
 
   void ChessBoard::resetBoard() {

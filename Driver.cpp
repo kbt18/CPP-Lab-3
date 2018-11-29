@@ -14,7 +14,10 @@ int main() {
   ChessBoard testboard;
   testboard.displayBoard();
 
-  testboard.submitMove("A2", "B4");
+  //testboard.submitMove("A2", "B4");
+  testboard.movePiece("A2", "A4");
+
+  testboard.displayBoard();
 
   return 0;
 }
