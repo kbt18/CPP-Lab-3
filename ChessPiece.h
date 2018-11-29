@@ -12,6 +12,8 @@ namespace chess {
     void setPosition(const char* position);
     void tryMove(const char* destination);
     const char* getSymbol();
+    //make private as much stuff as possible
+    //alternatively, make stuff helper functions
     bool isValidMove(const char* destination);
     void makeMove(const char* destination);
     bool isSameRank(const char* position);
