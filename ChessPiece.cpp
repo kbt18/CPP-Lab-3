@@ -6,7 +6,12 @@ namespace chess {
 
   ChessPiece::ChessPiece(const char* position) {
     symbol = "♟";
-    position_ = position;
+    if (isValidPosition(position))
+      position_ = position;
+    else {
+      cerr << "invalid position\n";
+      throw(-1);
+    }
   }
 
   const char* ChessPiece::getPosition() {

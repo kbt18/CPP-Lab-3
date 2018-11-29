@@ -9,18 +9,6 @@ namespace chess {
       for (int j = 0; j < 8; j++)
         board_[i][j] = NULL;
 
-    // for (int i = 0; i < 8; i++) {
-    //   char c1 = (char)(i + 'A');
-    //   char c2 = (char)(i + 'A');
-    //   const char* p1 = {c1 , '7', '\0'};
-    //   const char* p2 = {c2 , '2', '\0'};
-    //   //cout << p1 << ' ' << p2 << endl;
-    //   board_[1][i] = new ChessPiece(p2);
-    //   board_[6][i] = new ChessPiece(p1);
-    //   cout << checkPiecePosition(6, i) << ' ';
-    //   cout << checkPiecePosition(1, i) << endl;
-    // }
-
     board_[1][0] = new ChessPiece("A2");
     board_[1][1] = new ChessPiece("B2");
     board_[1][2] = new ChessPiece("C2");
@@ -29,7 +17,6 @@ namespace chess {
     board_[1][5] = new ChessPiece("F2");
     board_[1][6] = new ChessPiece("G2");
     board_[1][7] = new ChessPiece("H2");
-
 
   }
 
