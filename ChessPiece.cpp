@@ -4,13 +4,20 @@
 using namespace std;
 namespace chess {
 
-  ChessPiece::ChessPiece(const char* position) {
-    symbol = "♟";
+  ChessPiece::ChessPiece(const char* position, bool white) {
+
     if (isValidPosition(position))
       position_ = position;
     else {
       cerr << "invalid position\n";
       throw(-1);
+    }
+    if (white == 0) {
+      white_ = 0;
+      symbol = "♙";
+    } else {
+      white = 1;
+      symbol = "♟";
     }
   }
 
@@ -34,6 +41,10 @@ namespace chess {
     //   std::cerr << "cant jump over pieces\n";
     //   throw(-1);
     // }
+  }
+
+  void ChessPiece::makeMove(const char* destination) {
+    position_ = destination; 
   }
 
   bool ChessPiece::isSameRank(const char* position) {

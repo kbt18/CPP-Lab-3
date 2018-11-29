@@ -7,12 +7,13 @@
 namespace chess {
   class ChessPiece {
   public:
-    ChessPiece(const char* position);
+    ChessPiece(const char* position, bool white);
     const char* getPosition();
     void setPosition(const char* position);
     void tryMove(const char* destination);
     const char* getSymbol();
     bool isValidMove(const char* destination);
+    void makeMove(const char* destination);
     bool isSameRank(const char* position);
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
@@ -23,6 +24,6 @@ namespace chess {
   private:
     const char* symbol;
     const char* position_;
-    bool white;
+    bool white_;
   };
 }

@@ -9,14 +9,23 @@ namespace chess {
       for (int j = 0; j < 8; j++)
         board_[i][j] = NULL;
 
-    board_[1][0] = new ChessPiece("A2");
-    board_[1][1] = new ChessPiece("B2");
-    board_[1][2] = new ChessPiece("C2");
-    board_[1][3] = new ChessPiece("D2");
-    board_[1][4] = new ChessPiece("E2");
-    board_[1][5] = new ChessPiece("F2");
-    board_[1][6] = new ChessPiece("G2");
-    board_[1][7] = new ChessPiece("H2");
+    board_[1][0] = new ChessPiece("A2", 0);
+    board_[1][1] = new ChessPiece("B2", 0);
+    board_[1][2] = new ChessPiece("C2", 0);
+    board_[1][3] = new ChessPiece("D2", 0);
+    board_[1][4] = new ChessPiece("E2", 0);
+    board_[1][5] = new ChessPiece("F2", 0);
+    board_[1][6] = new ChessPiece("G2", 0);
+    board_[1][7] = new ChessPiece("H2", 0);
+
+    board_[6][0] = new ChessPiece("A7", 1);
+    board_[6][1] = new ChessPiece("B7", 1);
+    board_[6][2] = new ChessPiece("C7", 1);
+    board_[6][3] = new ChessPiece("D7", 1);
+    board_[6][4] = new ChessPiece("E7", 1);
+    board_[6][5] = new ChessPiece("F7", 1);
+    board_[6][6] = new ChessPiece("G7", 1);
+    board_[6][7] = new ChessPiece("H7", 1);
 
   }
 
@@ -60,6 +69,10 @@ namespace chess {
     }
     //cout << stringToRank(source) << ',' << stringToFile(source) << endl;
     board_[stringToRank(source)][stringToFile(source)]->tryMove(destination);
+  }
+
+  void ChessBoard::movePiece(const char* source, const char* destination) {
+    
   }
 
   void ChessBoard::resetBoard() {
