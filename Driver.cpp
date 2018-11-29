@@ -3,6 +3,7 @@
 #include <iostream>
 
 using namespace chess;
+using namespace std;
 
 int main() {
 //   if (!isValidPosition("B8"))
@@ -12,6 +13,9 @@ int main() {
 
   ChessBoard testboard;
   testboard.displayBoard();
+
+
+  testboard.submitMove("A2", "A3");
 
   return 0;
 }

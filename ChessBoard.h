@@ -8,6 +8,7 @@ namespace chess {
   public:
     ChessBoard();
 
+    const char* checkPiecePosition(int i, int j);
     void submitMove(const char* source, const char* destination);
     void displayBoard();
     void resetBoard();

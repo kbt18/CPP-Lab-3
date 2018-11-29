@@ -2,11 +2,13 @@
 #include "Helpers.h"
 #include <iostream>
 #include <cctype>
+#include <cmath>
 
 namespace chess {
   class ChessPiece {
   public:
-    ChessPiece();
+    ChessPiece(const char* position);
+    const char* getPosition();
     void setPosition(const char* position);
     void tryMove(const char* destination);
     const char* getSymbol();
@@ -21,5 +23,6 @@ namespace chess {
   private:
     const char* symbol;
     const char* position_;
+    bool white;
   };
 }
