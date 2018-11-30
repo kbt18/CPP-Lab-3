@@ -57,9 +57,38 @@ namespace chess {
 
     int end = stringToRank(destination);
 
-    for (; i < end - 1; i++) {
-      if (board[i][j] != NULL);
-        //return true;
+    for (; i < end - 1; i++)
+      if (board[i][j] != NULL)
+        return true;
+
+    return false;
+  }
+
+  bool ChessPiece::isPieceBetweenFile(const char* destination, ChessPiece* board[][8]) {
+    int i = stringToRank(position_);
+    int j = stringToFile(position_);
+
+    int end = stringToFile(destination);
+
+    for (; j < end - 1; j++)
+      if (board[i][j] != NULL)
+        return true;
+
+    return false;
+  }
+
+  bool ChessPiece::isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]) {
+    int i = stringToRank(position_);
+    int j = stringToFile(position_);
+
+    int endi = stringToRank(destination);
+    int endj = stringToFile(destination);
+
+    while ((i < endi - 1) && (j < endj - 1)) {
+      if (board[i][j] != NULL)
+        return true;
+      i++;
+      j++;
     }
 
     return false;
