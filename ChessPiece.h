@@ -11,13 +11,12 @@ namespace chess {
   public:
     ChessPiece(const char* position, bool white);
     const char* getPosition();
-    void setPosition(const char* position);
+    void setPosition(const char* p);
     void tryMove(const char* destination);
     const char* getSymbol();
     //make private as much stuff as possible
     //alternatively, make stuff helper functions
     bool isValidMove(const char* destination, ChessPiece* board[][8]);
-    void makeMove(const char* destination);
     bool isPieceBetween(const char* destination, ChessPiece* board[][8]);
     bool isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]);
     bool isPieceBetweenRank(const char* destination, ChessPiece* board[][8]);

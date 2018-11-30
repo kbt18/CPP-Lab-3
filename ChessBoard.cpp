@@ -29,10 +29,6 @@ namespace chess {
 
   }
 
-  const char* ChessBoard::checkPiecePosition(int i, int j) {
-    return board_[i][j]->getPosition();
-  }
-
   void ChessBoard::displayBoard() {
     cout << endl << "   ";
     for (int i = 0; i < 8; i++)
@@ -55,30 +51,51 @@ namespace chess {
 
   void ChessBoard::submitMove(const char* source, const char* destination) {
 
-    if (!isValidPosition(source)) {
-      cerr << source << " is not a valid board position.\n";
-      throw(-1);
-    } else if (!isValidPosition(destination)) {
-      cerr << destination << " is not a valid board position.\n";
-      throw(-1);
+    if (isValidMove(source, destination))
+      makeMove(source, destination);
+    else {
+      cerr << "NOT A VALID MOVE!\n";
     }
 
-    if (board_[stringToRank(source)][stringToFile(source)] == NULL) {
-      cerr << "No piece located at " << source << endl;
-      throw(-1);
-    }
-    //cout << stringToRank(source) << ',' << stringToFile(source) << endl;
-    //change to boolean isValidMove
-    board_[stringToRank(source)][stringToFile(source)]->tryMove(destination);
+  }
 
-    makeMove(source, destination);
+  bool ChessBoard::isOccupied(const char* position) {
+    int i = stringToRank(position);
+    int j = stringToRank(position);
+    if (board_[i][j] == NULL)
+      return false;
+    return true;
+  }
+
+  bool ChessBoard::isValidMove(const char* source, const char* destination) {
+    if (!isValidPosition(source))
+      return false;
+
+    if (!isValidPosition(destination))
+      return false;
+
+    if (!isOccupied(source))
+      return false;
+
+    int i_src = stringToRank(source);
+    int j_src = stringToFile(source);
+
+    if (!board_[i_src][j_src]->isValidMove(destination, board_))
+      return false;
+
+    cerr << "ChessBoard::isValidMove returns true\n";
+    return true;
   }
 
   void ChessBoard::makeMove(const char* source, const char* destination) {
-    board_[stringToRank(destination)][stringToFile(destination)] =
-    board_[stringToRank(source)][stringToFile(source)];
-    board_[stringToRank(source)][stringToFile(source)] = NULL;
-    board_[stringToRank(destination)][stringToFile(destination)]->makeMove(destination);
+    int i_src = stringToRank(source);
+    int j_src = stringToFile(source);
+    int i_dest = stringToRank(destination);
+    int j_dest = stringToFile(destination);
+
+    board_[i_dest][j_dest] = board_[i_src][j_src];
+    board_[i_src][j_src] = NULL;
+    board_[i_dest][j_dest]->setPosition(destination);
   }
 
   void ChessBoard::resetBoard() {

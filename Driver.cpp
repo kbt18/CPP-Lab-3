@@ -15,9 +15,11 @@ int main() {
   testboard.displayBoard();
 
   //testboard.submitMove("A2", "B4");
-  testboard.submitMove("A2", "A4");
+  testboard.submitMove("A2", "A8");
 
   testboard.displayBoard();
+
+  //testboard.submitMove("A4", "B7");
 
   return 0;
 }

@@ -26,12 +26,8 @@ namespace chess {
     return position_;
   }
 
-  void ChessPiece::setPosition(const char* position) {
-    if (isValidPosition(position))
-      position_ = position;
-  }
-
   bool ChessPiece::isValidMove(const char* destination, ChessPiece* board[][8]) {
+
     if (!(isSameRank(destination) || isSameFile(destination) ||
       isSameDiag(destination))) {
         return false;
@@ -53,8 +49,8 @@ namespace chess {
 
   bool ChessPiece::isPieceBetweenRank(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
+    i++;
     int j = stringToFile(position_);
-
     int end = stringToRank(destination);
 
     for (; i < end - 1; i++)
@@ -67,7 +63,7 @@ namespace chess {
   bool ChessPiece::isPieceBetweenFile(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
-
+    j++;
     int end = stringToFile(destination);
 
     for (; j < end - 1; j++)
@@ -80,6 +76,8 @@ namespace chess {
   bool ChessPiece::isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
+    i++;
+    j++;
 
     int endi = stringToRank(destination);
     int endj = stringToFile(destination);
@@ -91,6 +89,7 @@ namespace chess {
       j++;
     }
 
+    cerr << "ChessPiece::isPieceBetweenDiag returns false\n";
     return false;
   }
 
@@ -108,8 +107,8 @@ namespace chess {
     // }
   }
 
-  void ChessPiece::makeMove(const char* destination) {
-    position_ = destination;
+  void ChessPiece::setPosition(const char* p) {
+    position_ = p;
   }
 
   bool ChessPiece::isSameRank(const char* position) {
