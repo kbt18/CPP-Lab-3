@@ -68,10 +68,13 @@ namespace chess {
       throw(-1);
     }
     //cout << stringToRank(source) << ',' << stringToFile(source) << endl;
+    //change to boolean isValidMove
     board_[stringToRank(source)][stringToFile(source)]->tryMove(destination);
+
+    makeMove(source, destination);
   }
 
-  void ChessBoard::movePiece(const char* source, const char* destination) {
+  void ChessBoard::makeMove(const char* source, const char* destination) {
     board_[stringToRank(destination)][stringToFile(destination)] =
     board_[stringToRank(source)][stringToFile(source)];
     board_[stringToRank(source)][stringToFile(source)] = NULL;

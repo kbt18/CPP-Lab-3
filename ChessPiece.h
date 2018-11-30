@@ -1,3 +1,5 @@
+#ifndef CHESSPIECE_H
+#define CHESSPIECE_H
 
 #include "Helpers.h"
 #include <iostream>
@@ -14,18 +16,21 @@ namespace chess {
     const char* getSymbol();
     //make private as much stuff as possible
     //alternatively, make stuff helper functions
-    bool isValidMove(const char* destination);
+    bool isValidMove(const char* destination, ChessPiece* board[][8]);
     void makeMove(const char* destination);
+    bool isPieceBetween(const char* destination, ChessPiece* board[][8]);
+    bool isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]);
+    bool isPieceBetweenRank(const char* destination, ChessPiece* board[][8]);
+    bool isPieceBetweenFile(const char* destination, ChessPiece* board[][8]);
+
+  private:
     bool isSameRank(const char* position);
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
-    bool isPieceBetween(const char* destination);
-    bool isPieceBetweenDiag(const char* destination);
-    bool isPieceBetweenRank(const char* destination);
-    bool isPieceBetweenFile(const char* destination);
-  private:
-    const char* symbol;
+    const char* symbol_;
     const char* position_;
     bool white_;
   };
 }
+
+#endif
