@@ -30,50 +30,67 @@ namespace chess {
 
     if (!(isSameRank(destination) || isSameFile(destination) ||
       isSameDiag(destination))) {
+        cerr << "not same rank, file or diagonal\n";
         return false;
     }
 
-    if (isPieceBetween(destination, board)) {
+    if (isBlocked(destination, board)) {
+      cerr << "piece is blocking move\n";
       return false;
     }
 
     return true;
   }
 
-  bool ChessPiece::isPieceBetween(const char* destination, ChessPiece* board[][8]) {
-    if (isPieceBetweenRank(destination, board) || isPieceBetweenFile(destination, board) ||
-      isPieceBetweenDiag(destination, board))
+  bool ChessPiece::isBlocked(const char* destination, ChessPiece* board[][8]) {
+    if (isSameRank(destination)) {
+      cerr << "Rank move\n";
+      if (isBlockedAlongRank(destination, board))
         return true;
+    }
+
+    if (isSameFile(destination)) {
+      cerr << "File move\n";
+      if (isBlockedAlongFile(destination, board))
+        return true;
+    }
+
+    if (isSameDiag(destination)) {
+      cerr << "Diagonal move\n";
+      if (isBlockedAlongDiag(destination, board))
+        return true;
+    }
+
     return false;
   }
 
-  bool ChessPiece::isPieceBetweenRank(const char* destination, ChessPiece* board[][8]) {
+  bool ChessPiece::isBlockedAlongRank(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
-    i++;
+    int j = stringToFile(position_);
+    int end = stringToFile(destination);
+    j++;
+
+    for (; j < end; j++)
+      if (board[i][j] != NULL)
+        return true;
+
+    return false;
+  }
+
+  bool ChessPiece::isBlockedAlongFile(const char* destination, ChessPiece* board[][8]) {
+    int i = stringToRank(position_);
     int j = stringToFile(position_);
     int end = stringToRank(destination);
+    i++;
 
-    for (; i < end - 1; i++)
+    for (; i < end; i++)
       if (board[i][j] != NULL)
         return true;
 
     return false;
   }
 
-  bool ChessPiece::isPieceBetweenFile(const char* destination, ChessPiece* board[][8]) {
-    int i = stringToRank(position_);
-    int j = stringToFile(position_);
-    j++;
-    int end = stringToFile(destination);
-
-    for (; j < end - 1; j++)
-      if (board[i][j] != NULL)
-        return true;
-
-    return false;
-  }
-
-  bool ChessPiece::isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]) {
+  bool ChessPiece::isBlockedAlongDiag(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
     i++;
@@ -82,29 +99,14 @@ namespace chess {
     int endi = stringToRank(destination);
     int endj = stringToFile(destination);
 
-    while ((i < endi - 1) && (j < endj - 1)) {
+    while ((i < endi) && (j < endj)) {
       if (board[i][j] != NULL)
         return true;
       i++;
       j++;
     }
 
-    cerr << "ChessPiece::isPieceBetweenDiag returns false\n";
     return false;
-  }
-
-
-  void ChessPiece::tryMove(const char* destination) {
-    if (!(isSameRank(destination) || isSameFile(destination) ||
-      isSameDiag(destination))) {
-        std::cerr << "invalid destination\n";
-        throw (-1);
-    }
-
-    // if (isPieceBetween(destination)) {
-    //   std::cerr << "cant jump over pieces\n";
-    //   throw(-1);
-    // }
   }
 
   void ChessPiece::setPosition(const char* p) {

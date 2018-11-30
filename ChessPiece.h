@@ -12,15 +12,14 @@ namespace chess {
     ChessPiece(const char* position, bool white);
     const char* getPosition();
     void setPosition(const char* p);
-    void tryMove(const char* destination);
     const char* getSymbol();
     //make private as much stuff as possible
     //alternatively, make stuff helper functions
     bool isValidMove(const char* destination, ChessPiece* board[][8]);
-    bool isPieceBetween(const char* destination, ChessPiece* board[][8]);
-    bool isPieceBetweenDiag(const char* destination, ChessPiece* board[][8]);
-    bool isPieceBetweenRank(const char* destination, ChessPiece* board[][8]);
-    bool isPieceBetweenFile(const char* destination, ChessPiece* board[][8]);
+    bool isBlocked(const char* destination, ChessPiece* board[][8]);
+    bool isBlockedAlongDiag(const char* destination, ChessPiece* board[][8]);
+    bool isBlockedAlongRank(const char* destination, ChessPiece* board[][8]);
+    bool isBlockedAlongFile(const char* destination, ChessPiece* board[][8]);
 
   private:
     bool isSameRank(const char* position);

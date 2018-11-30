@@ -50,7 +50,8 @@ namespace chess {
 
 
   void ChessBoard::submitMove(const char* source, const char* destination) {
-
+    cout << "source: " << source << endl;
+    cout << "destination: " << destination << endl;
     if (isValidMove(source, destination))
       makeMove(source, destination);
     else {
@@ -61,7 +62,8 @@ namespace chess {
 
   bool ChessBoard::isOccupied(const char* position) {
     int i = stringToRank(position);
-    int j = stringToRank(position);
+    int j = stringToFile(position);
+
     if (board_[i][j] == NULL)
       return false;
     return true;
@@ -74,8 +76,10 @@ namespace chess {
     if (!isValidPosition(destination))
       return false;
 
-    if (!isOccupied(source))
+    if (!isOccupied(source)) {
+      cerr << "no piece at " << source << endl;
       return false;
+    }
 
     int i_src = stringToRank(source);
     int j_src = stringToFile(source);
@@ -83,7 +87,6 @@ namespace chess {
     if (!board_[i_src][j_src]->isValidMove(destination, board_))
       return false;
 
-    cerr << "ChessBoard::isValidMove returns true\n";
     return true;
   }
 
@@ -96,6 +99,8 @@ namespace chess {
     board_[i_dest][j_dest] = board_[i_src][j_src];
     board_[i_src][j_src] = NULL;
     board_[i_dest][j_dest]->setPosition(destination);
+
+    cerr << board_[i_dest][j_dest]->getPosition() << endl;
   }
 
   void ChessBoard::resetBoard() {
