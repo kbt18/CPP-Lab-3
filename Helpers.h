@@ -7,6 +7,8 @@ namespace chess {
   int stringToRank(const char* position);
 
   int stringToFile(const char* position);
+
+  void swapValues(int& v1, int& v2);
 }
 
 #endif

@@ -27,14 +27,7 @@ int main() {
     c_destination = destination.c_str();
     testboard.submitMove(c_source, c_destination);
   }
-  testboard.displayBoard();
 
-  //testboard.submitMove("A2", "B4");
-  testboard.submitMove("A2", "A6");
-
-  testboard.displayBoard();
-
-  //testboard.submitMove("A4", "B7");
 
   return 0;
 }

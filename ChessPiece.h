@@ -4,6 +4,7 @@
 #include "Helpers.h"
 #include <iostream>
 #include <cctype>
+#include <cstring>
 #include <cmath>
 
 namespace chess {
@@ -26,7 +27,7 @@ namespace chess {
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
     const char* symbol_;
-    const char* position_;
+    char position_[3];
     bool white_;
   };
 }

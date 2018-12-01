@@ -7,7 +7,7 @@ namespace chess {
   ChessPiece::ChessPiece(const char* position, bool white) {
 
     if (isValidPosition(position))
-      position_ = position;
+      strcpy(position_, position);
     else {
       cerr << "invalid position\n";
       throw(-1);
@@ -43,14 +43,15 @@ namespace chess {
   }
 
   bool ChessPiece::isBlocked(const char* destination, ChessPiece* board[][8]) {
+    cerr << "piece position is " << position_ << endl;
     if (isSameRank(destination)) {
-      cerr << "Rank move\n";
+      cerr << "file move\n";
       if (isBlockedAlongRank(destination, board))
         return true;
     }
 
     if (isSameFile(destination)) {
-      cerr << "File move\n";
+      cerr << "rank move\n";
       if (isBlockedAlongFile(destination, board))
         return true;
     }
@@ -68,6 +69,10 @@ namespace chess {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
     int end = stringToFile(destination);
+
+    if (j > end)
+      swapValues(j, end);
+
     j++;
 
     for (; j < end; j++)
@@ -81,6 +86,10 @@ namespace chess {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
     int end = stringToRank(destination);
+
+    if (i > end)
+      swapValues(i, end);
+
     i++;
 
     for (; i < end; i++)
@@ -93,24 +102,41 @@ namespace chess {
   bool ChessPiece::isBlockedAlongDiag(const char* destination, ChessPiece* board[][8]) {
     int i = stringToRank(position_);
     int j = stringToFile(position_);
-    i++;
-    j++;
-
     int endi = stringToRank(destination);
     int endj = stringToFile(destination);
 
-    while ((i < endi) && (j < endj)) {
-      if (board[i][j] != NULL)
-        return true;
+    //left to right down
+    if (i > endi && j < endj) {
+      i--;
+      j++;
+      while (i > endi && j < endj) {
+        if (board[i][j] != NULL)
+          return true;
+        i--;
+        j++;
+      }
+    }
+
+    //left to right up
+    if (i < endi && j < endj) {
       i++;
       j++;
+      while ((i < endi) && (j < endj)) {
+        if (board[i][j] != NULL)
+          return true;
+        i++;
+        j++;
+      }
     }
+
+
+
 
     return false;
   }
 
   void ChessPiece::setPosition(const char* p) {
-    position_ = p;
+    strcpy(position_, p); //fuck this bug
   }
 
   bool ChessPiece::isSameRank(const char* position) {

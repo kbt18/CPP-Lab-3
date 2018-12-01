@@ -50,11 +50,12 @@ namespace chess {
 
 
   void ChessBoard::submitMove(const char* source, const char* destination) {
-    cout << "source: " << source << endl;
-    cout << "destination: " << destination << endl;
-    if (isValidMove(source, destination))
+    //cout << "source: " << source << endl;
+    //cout << "destination: " << destination << endl;
+    if (isValidMove(source, destination)) {
+      cout << "Move was valid\n";
       makeMove(source, destination);
-    else {
+    } else {
       cerr << "NOT A VALID MOVE!\n";
     }
 
@@ -98,9 +99,10 @@ namespace chess {
 
     board_[i_dest][j_dest] = board_[i_src][j_src];
     board_[i_src][j_src] = NULL;
+    cerr << "setting piece position to " << destination << endl;
     board_[i_dest][j_dest]->setPosition(destination);
 
-    cerr << board_[i_dest][j_dest]->getPosition() << endl;
+    cerr << "piece position is now: " << board_[i_dest][j_dest]->getPosition() << endl;
   }
 
   void ChessBoard::resetBoard() {

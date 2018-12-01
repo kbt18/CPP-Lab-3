@@ -27,4 +27,10 @@ namespace chess {
     return ((int)(position[0] - 'A'));
   }
 
+  void swapValues(int& v1, int& v2) {
+    int temp = v1;
+    v1 = v2;
+    v2 = temp;
+  }
+
 }
