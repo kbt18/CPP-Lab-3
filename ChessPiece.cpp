@@ -14,7 +14,7 @@ namespace chess {
     }
     if (white == 0) {
       white_ = 0;
-      symbol_ = "♙";
+      symbol_ = "♙"; // colours are wrong way round
     } else {
       white = 1;
       symbol_ = "♟";
@@ -105,8 +105,16 @@ namespace chess {
     int endi = stringToRank(destination);
     int endj = stringToFile(destination);
 
-    //left to right down
-    if (i > endi && j < endj) {
+
+    if (i < endi && j > endj) {
+      swapValues(i, endi);
+      swapValues(j, endj);
+    } else if (i > endi && j > endj) {
+      swapValues(i, endi);
+      swapValues(j, endj);
+    }
+
+    if (i > endi && j < endj) { //top left bottom right
       i--;
       j++;
       while (i > endi && j < endj) {
@@ -115,10 +123,7 @@ namespace chess {
         i--;
         j++;
       }
-    }
-
-    //left to right up
-    if (i < endi && j < endj) {
+    } else if (i < endi && j < endj) { //bottom left top right
       i++;
       j++;
       while ((i < endi) && (j < endj)) {
@@ -129,14 +134,11 @@ namespace chess {
       }
     }
 
-
-
-
     return false;
   }
 
   void ChessPiece::setPosition(const char* p) {
-    strcpy(position_, p); //fuck this bug
+    strcpy(position_, p);
   }
 
   bool ChessPiece::isSameRank(const char* position) {

@@ -44,8 +44,14 @@ namespace chess {
           cout << "  " << board_[i][j]->getSymbol() << "  ";
         }
       }
+      cout << "  " <<  i + 1;
       cout << endl << endl;
     }
+
+    cout << "   ";
+    for (int i = 0; i < 8; i++)
+      cout << "  " << (char)('A' + i) << "  ";
+    cout << endl << endl;
   }
 
 
@@ -96,6 +102,9 @@ namespace chess {
     int j_src = stringToFile(source);
     int i_dest = stringToRank(destination);
     int j_dest = stringToFile(destination);
+
+    if (isOccupied(destination))
+      cout << source << " takes " << destination << endl;
 
     board_[i_dest][j_dest] = board_[i_src][j_src];
     board_[i_src][j_src] = NULL;

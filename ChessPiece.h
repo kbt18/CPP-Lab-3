@@ -10,24 +10,27 @@
 namespace chess {
   class ChessPiece {
   public:
+    friend class ChessBoard;
     ChessPiece(const char* position, bool white);
     const char* getPosition();
-    void setPosition(const char* p);
+
     const char* getSymbol();
     //make private as much stuff as possible
     //alternatively, make stuff helper functions
-    bool isValidMove(const char* destination, ChessPiece* board[][8]);
+    virtual bool isValidMove(const char* destination, ChessPiece* board[][8]);
     bool isBlocked(const char* destination, ChessPiece* board[][8]);
     bool isBlockedAlongDiag(const char* destination, ChessPiece* board[][8]);
     bool isBlockedAlongRank(const char* destination, ChessPiece* board[][8]);
     bool isBlockedAlongFile(const char* destination, ChessPiece* board[][8]);
 
-  private:
+  protected:
+    const char* symbol_;
+    void setPosition(const char* p);
+    char position_[3];
     bool isSameRank(const char* position);
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
-    const char* symbol_;
-    char position_[3];
+  private:
     bool white_;
   };
 }
