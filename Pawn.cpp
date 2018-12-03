@@ -6,8 +6,11 @@ namespace chess {
     if (!ChessPiece::isValidMove(destination, board))
       return false;
 
-    if (!isSameFile(destination) && !isTakingMove(destination, board))
+    if (!isSameFile(destination) || !isTakingMove(destination, board))
       return false;
+
+    //check first move
+    
 
     return true;
   }
@@ -22,8 +25,9 @@ namespace chess {
     if (!isSameDiag(destination))
       return false;
 
-    
-    //TAKING MOVES ARE +1 DIAGONAL
+    if (stringToRank(destination) != stringToRank(position_) + 1)
+      return false;
+
     return true;
   }
 }
