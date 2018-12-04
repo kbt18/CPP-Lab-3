@@ -1,4 +1,4 @@
-OBJ = Driver.o ChessBoard.o ChessPiece.o Helpers.o
+OBJ = Driver.o ChessBoard.o ChessPiece.o Pawn.o Rook.o Bishop.o Helpers.o 
 EXE = chess
 CXX = g++
 CXXFLAGS = -Wall -g -MMD

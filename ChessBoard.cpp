@@ -9,23 +9,27 @@ namespace chess {
       for (int j = 0; j < 8; j++)
         board_[i][j] = NULL;
 
-    board_[1][0] = new ChessPiece("A2", 0);
-    board_[1][1] = new ChessPiece("B2", 0);
-    board_[1][2] = new ChessPiece("C2", 0);
-    board_[1][3] = new ChessPiece("D2", 0);
-    board_[1][4] = new ChessPiece("E2", 0);
-    board_[1][5] = new ChessPiece("F2", 0);
-    board_[1][6] = new ChessPiece("G2", 0);
-    board_[1][7] = new ChessPiece("H2", 0);
+    board_[0][0] = new Rook("A1", 1);
+    board_[0][7] = new Rook("H1", 1);
+    board_[0][1] = new Bishop("B1", 1);
+    board_[0][6] = new Bishop("G1", 1);
+    board_[1][0] = new Pawn("A2", 1);
+    board_[1][1] = new Pawn("B2", 1);
+    board_[1][2] = new Pawn("C2", 1);
+    board_[1][3] = new Pawn("D2", 1);
+    board_[1][4] = new Pawn("E2", 1);
+    board_[1][5] = new Pawn("F2", 1);
+    board_[1][6] = new Pawn("G2", 1);
+    board_[1][7] = new Pawn("H2", 1);
 
-    board_[6][0] = new ChessPiece("A7", 1);
-    board_[6][1] = new ChessPiece("B7", 1);
-    board_[6][2] = new ChessPiece("C7", 1);
-    board_[6][3] = new ChessPiece("D7", 1);
-    board_[6][4] = new ChessPiece("E7", 1);
-    board_[6][5] = new ChessPiece("F7", 1);
-    board_[6][6] = new ChessPiece("G7", 1);
-    board_[6][7] = new ChessPiece("H7", 1);
+    board_[6][0] = new Pawn("A7", 0);
+    board_[6][1] = new Pawn("B7", 0);
+    board_[6][2] = new Pawn("C7", 0);
+    board_[6][3] = new Pawn("D7", 0);
+    board_[6][4] = new Pawn("E7", 0);
+    board_[6][5] = new Pawn("F7", 0);
+    board_[6][6] = new Pawn("G7", 0);
+    board_[6][7] = new Pawn("H7", 0);
 
   }
 
@@ -93,6 +97,15 @@ namespace chess {
 
     if (!board_[i_src][j_src]->isValidMove(destination, board_))
       return false;
+
+    //check same colour at destination
+    int i_dest = stringToRank(destination);
+    int j_dest = stringToFile(destination);
+    if (isOccupied(destination))
+      if (board_[i_src][j_src]->white_ == board_[i_dest][j_dest]->white_) {
+        cerr << "cannot take own pieces\n";
+        return false;
+      }
 
     return true;
   }

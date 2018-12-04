@@ -25,12 +25,11 @@ namespace chess {
 
   protected:
     const char* symbol_;
-    void setPosition(const char* p);
+    virtual void setPosition(const char* p);
     char position_[3];
     bool isSameRank(const char* position);
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
-  private:
     bool white_;
   };
 }

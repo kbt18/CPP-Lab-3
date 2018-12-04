@@ -3,6 +3,9 @@
 #define CHESSBOARD_H
 
 #include "ChessPiece.h"
+#include "Pawn.h"
+#include "Rook.h"
+#include "Bishop.h"
 #include <iostream>
 
 namespace chess {
