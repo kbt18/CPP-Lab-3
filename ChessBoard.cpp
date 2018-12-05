@@ -138,4 +138,15 @@ namespace chess {
   void ChessBoard::resetBoard() {
 
   }
+
+  bool ChessBoard::isKingInCheck() {
+    char possible_move[3];
+
+    for (int i = 0; i < 8; i++)
+      for (int j = 0; j < 8; j++)
+        if (board_[i][j] != NULL)
+          if board_[i][j]->isValidMove()
+
+
+  }
 }

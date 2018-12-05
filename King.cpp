@@ -4,6 +4,7 @@ using namespace std;
 namespace chess {
 
   King::King(const char* position, bool white) : ChessPiece(position, white) {
+    isKing_ = true;
     if (white == 0) {
       white_ = false;
       symbol_ = "♚"; // colours are wrong way round

@@ -5,7 +5,7 @@ using namespace std;
 namespace chess {
 
   ChessPiece::ChessPiece(const char* position, bool white) {
-
+    isKing_ = false;
     if (isValidPosition(position))
       strcpy(position_, position);
     else {
@@ -19,7 +19,6 @@ namespace chess {
       white_ = true;
       symbol_ = "♙";
     }
-
   }
 
   const char* ChessPiece::getPosition() {
@@ -161,5 +160,19 @@ namespace chess {
 
   const char* ChessPiece::getSymbol() {
     return symbol_;
+  }
+
+  bool isTakingMove(const char* target, ChessPiece* board[][8]) {
+    int i = stringToRank(target);
+    int j = stringToRank(target);
+
+    if (board[i][j] == NULL)
+      return false;
+
+    return true;
+  }
+
+  bool hasPlacedKingInCheck(ChessPiece* board[][8]) {
+    char possible_move[3];
   }
 }

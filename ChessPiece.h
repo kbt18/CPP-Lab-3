@@ -31,6 +31,9 @@ namespace chess {
     bool isSameFile(const char* position);
     bool isSameDiag(const char* position);
     bool white_;
+    bool isKing_;
+    bool isTakingMove(const char* target, ChessPiece* board[][8]);
+    bool hasPlacedKingInCheck(ChessPiece* board[][8]);
   };
 }
 
