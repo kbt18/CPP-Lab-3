@@ -172,7 +172,4 @@ namespace chess {
     return true;
   }
 
-  bool hasPlacedKingInCheck(ChessPiece* board[][8]) {
-    char possible_move[3];
-  }
 }

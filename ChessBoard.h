@@ -24,6 +24,7 @@ namespace chess {
     bool isOccupied(const char* position);
   private:
     bool isKingInCheck();
+    bool moveCouldTakeKing(const char* source);
     void makeMove(const char* source, const char* destination);
     ChessPiece* board_[8][8];
   };

@@ -68,6 +68,7 @@ namespace chess {
     if (isValidMove(source, destination)) {
       cout << "Move was valid\n";
       makeMove(source, destination);
+      isKingInCheck();
     } else {
       cerr << "NOT A VALID MOVE!\n";
     }
@@ -140,13 +141,45 @@ namespace chess {
   }
 
   bool ChessBoard::isKingInCheck() {
-    char possible_move[3];
+    char source[3];
+    char rank[1], file[1];
 
-    for (int i = 0; i < 8; i++)
-      for (int j = 0; j < 8; j++)
+    for (int i = 0; i < 8; i++){
+      rank[0] = ('1' + i);
+      for (int j = 0; j < 8; j++) {
+        file[0] = ('A' + j);
+        source[0] = file[0];
+        source[1] = rank[0];
+        source[2] = '\0';
+          if (board_[i][j] != NULL)
+            if (moveCouldTakeKing(source))
+              return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool ChessBoard::moveCouldTakeKing(const char* source) {
+    char destination[3];
+    char rank[1], file[1];
+
+    for (int i = 0; i < 8; i++) {
+      rank[0] = ('1' + i);
+      for (int j = 0; j < 8; j++) {
+        file[0] = ('A' + j);
+        destination[0] = file[0];
+        destination[1] = rank[0];
+        destination[2] = '\0';
         if (board_[i][j] != NULL)
-          if board_[i][j]->isValidMove()
+          if (board_[i][j]->isKing_)
+            if (isValidMove(source, destination)) {
+              cout << "A king is in check!\n";
+              return true;
+            }
+      }
+    }
 
-
+    return false;
   }
 }
