@@ -13,10 +13,10 @@ namespace chess {
     //else is same file or is taking move
 
     if (white_) {
-      if position_[1] > destination[1]
+      if (position_[1] > destination[1])
         return false;
     } else {
-      if position_[1] < destination[1]
+      if (position_[1] < destination[1])
         return false;
     }
 
