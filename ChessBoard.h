@@ -6,6 +6,9 @@
 #include "Pawn.h"
 #include "Rook.h"
 #include "Bishop.h"
+#include "Knight.h"
+#include "Queen.h"
+#include "King.h"
 #include <iostream>
 
 namespace chess {

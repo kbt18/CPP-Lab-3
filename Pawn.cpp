@@ -12,7 +12,8 @@ namespace chess {
       return false;
     //else is same file or is taking move
 
-    //check first move
+    //must also work in opposite direction
+    
     if (!is_first_move_) {
       if (stringToRank(destination) > stringToRank(position_) + 1)
         return false;
@@ -33,6 +34,7 @@ namespace chess {
     if (!isSameDiag(destination))
       return false;
 
+    //must also work in opposite direction
     if (stringToRank(destination) != stringToRank(position_) + 1)
       return false;
 

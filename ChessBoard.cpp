@@ -13,6 +13,9 @@ namespace chess {
     board_[0][7] = new Rook("H1", 1);
     board_[0][1] = new Bishop("B1", 1);
     board_[0][6] = new Bishop("G1", 1);
+    board_[0][2] = new Knight("C1", 1);
+    board_[0][5] = new Knight("F1", 1);
+    board_[3][2] = new King("C4", 1);
     board_[1][0] = new Pawn("A2", 1);
     board_[1][1] = new Pawn("B2", 1);
     board_[1][2] = new Pawn("C2", 1);
@@ -86,6 +89,11 @@ namespace chess {
 
     if (!isValidPosition(destination))
       return false;
+
+    if (strcmp(destination, source) == 0) {
+      cerr << "destination cannot equal source\n";
+      return false;
+    }
 
     if (!isOccupied(source)) {
       cerr << "no piece at " << source << endl;
