@@ -12,14 +12,33 @@ namespace chess {
       return false;
     //else is same file or is taking move
 
-    //must also work in opposite direction
-    
-    if (!is_first_move_) {
-      if (stringToRank(destination) > stringToRank(position_) + 1)
+    if (white_) {
+      if position_[1] > destination[1]
         return false;
-    } else if (stringToRank(destination) > stringToRank(position_) + 2) {
-      return false;
+    } else {
+      if position_[1] < destination[1]
+        return false;
     }
+
+    //dont bother with string to rank
+
+    //must also work in opposite direction
+    if (white_) {
+      if (!is_first_move_) {
+        if (stringToRank(destination) - stringToRank(position_) > 1)
+          return false;
+      } else if (stringToRank(destination) - stringToRank(position_) > 2) {
+        return false;
+      }
+    } else {
+      if (!is_first_move_) {
+        if (stringToRank(position_) - stringToRank(destination) > 1)
+          return false;
+      } else if (stringToRank(position_) - stringToRank(destination) > 2) {
+        return false;
+      }
+    }
+
 
     return true;
   }
@@ -35,8 +54,14 @@ namespace chess {
       return false;
 
     //must also work in opposite direction
-    if (stringToRank(destination) != stringToRank(position_) + 1)
-      return false;
+    if (white_) {
+      if (stringToRank(destination) != stringToRank(position_) + 1)
+        return false;
+    } else {
+      if (stringToRank(destination) != stringToRank(position_) - 1)
+        return false;
+    }
+
 
     return true;
   }
