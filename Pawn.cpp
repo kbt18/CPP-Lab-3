@@ -2,7 +2,7 @@
 #include "Pawn.h"
 
 namespace chess {
-  Pawn::Pawn(const char* position, bool white) : ChessPiece(position, white) {}
+  Pawn::Pawn(const char* position, bool white) : ChessPiece(position, white), is_first_move_(true) {}
 
   bool Pawn::isValidMove(const char* destination, ChessPiece* board[][8]) {
     if (!ChessPiece::isValidMove(destination, board))
@@ -12,7 +12,7 @@ namespace chess {
       return false;
     //else is same file or is taking move
 
-    if (white_) {
+    if (isWhite_) {
       if (position_[1] > destination[1])
         return false;
     } else {
@@ -23,7 +23,7 @@ namespace chess {
     //dont bother with string to rank
 
     //must also work in opposite direction
-    if (white_) {
+    if (isWhite_) {
       if (!is_first_move_) {
         if (stringToRank(destination) - stringToRank(position_) > 1)
           return false;
@@ -54,7 +54,7 @@ namespace chess {
       return false;
 
     //must also work in opposite direction
-    if (white_) {
+    if (isWhite_) {
       if (stringToRank(destination) != stringToRank(position_) + 1)
         return false;
     } else {

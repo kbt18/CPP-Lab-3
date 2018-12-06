@@ -9,7 +9,7 @@ namespace chess {
     Pawn(const char* position, bool white);
     bool isValidMove(const char* destination, ChessPiece* board[][8]); //can be private?
   private:
-    bool is_first_move_ = true;
+    bool is_first_move_;
     bool isTakingMove(const char* destination, ChessPiece* board[][8]);
     void setPosition(const char* p);
   };

@@ -23,8 +23,13 @@ namespace chess {
     void resetBoard();
     bool isOccupied(const char* position);
   private:
+    void changeTurn();
+    bool isWhiteTurn_;
+    bool isKingInCheck_;
     bool isKingInCheck();
+    bool isKingInCheckMate();
     bool moveCouldTakeKing(const char* source);
+    bool moveUnchecksKing(const char* source);
     void makeMove(const char* source, const char* destination);
     ChessPiece* board_[8][8];
   };

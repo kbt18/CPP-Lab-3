@@ -5,10 +5,10 @@ namespace chess {
 
   Bishop::Bishop(const char* position, bool white) : ChessPiece(position, white) {
     if (white == 0) {
-      white_ = false;
+      isWhite_ = false;
       symbol_ = "♝";
     } else {
-      white_ = true;
+      isWhite_ = true;
       symbol_ = "♗";
     }
   }

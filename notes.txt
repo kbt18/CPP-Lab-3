@@ -1,0 +1,12 @@
+
+
+
+Chess isCheckMate algorithm
+  if king is in check
+    for all possible valid moves
+      try move
+        if king is not still in check
+          checkmate = false
+        else
+          undo move
+    checkmate = true

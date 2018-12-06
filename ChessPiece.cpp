@@ -13,10 +13,10 @@ namespace chess {
       throw(-1);
     }
     if (white == 0) {
-      white_ = false;
+      isWhite_ = false;
       symbol_ = "♟"; // colours are wrong way round
     } else {
-      white_ = true;
+      isWhite_ = true;
       symbol_ = "♙";
     }
   }
