@@ -26,8 +26,8 @@ namespace chess {
     board_[1][6] = new Pawn("G2", 1);
     board_[1][7] = new Pawn("H2", 1);
 
-    board_[5][6] = new Queen("G6", 0);
-    board_[5][5] = new Queen("F6", 0);
+    board_[3][7] = new Queen("H4", 0);
+    board_[4][7] = new Queen("H5", 0);
     board_[5][7] = new Queen("H6", 0);
     board_[6][0] = new Pawn("A7", 0);
     board_[6][1] = new Pawn("B7", 0);
@@ -72,6 +72,7 @@ namespace chess {
     if (isValidMove(source, destination)) {
       cout << "Move was valid\n";
       makeMove(source, destination);
+      changeTurn();
       if (isKingInCheck()) {
         isKingInCheck_ = true;
         if (isKingInCheckMate())
@@ -79,7 +80,6 @@ namespace chess {
       } else {
         isKingInCheck_ = false;
       }
-      changeTurn();
     } else {
       cerr << "NOT A VALID MOVE!\n";
     }
@@ -207,7 +207,6 @@ namespace chess {
   bool ChessBoard::moveUnchecksKing(const char* source) {
     char destination[3];
     char rank[1], file[1];
-    changeTurn();
 
     for (int i = 0; i < 8; i++) {
       rank[0] = ('1' + i);
@@ -220,7 +219,6 @@ namespace chess {
           makeMove(source, destination);
           if (!isKingInCheck()) {
             makeMove(destination, source);
-            changeTurn();
             return true;
           }
           makeMove(destination, source);
@@ -228,13 +226,13 @@ namespace chess {
       }
     }
 
-    changeTurn();
     return false;
   }
 
   bool ChessBoard::moveCouldTakeKing(const char* source) {
     char destination[3];
     char rank[1], file[1];
+    //changeTurn();
 
     for (int i = 0; i < 8; i++) {
       rank[0] = ('1' + i);
