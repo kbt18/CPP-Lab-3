@@ -15,6 +15,8 @@ namespace chess {
   }
 
   bool King::isValidMove(const char* destination, ChessPiece* board[][8]) {
+    printName();
+
     if (!ChessPiece::isValidMove(destination, board))
       return false;
 
@@ -27,5 +29,11 @@ namespace chess {
     return true;
   }
 
+  void King::printName() {
+    if (isWhite_)
+      std::cout << "White's King ";
+    else
+      std::cout << "Black's King ";
+  }
 
 }

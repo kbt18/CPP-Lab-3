@@ -8,7 +8,8 @@ namespace chess {
   public:
     Queen(const char* position, bool white);
   private:
-
+    void printName();
+    bool isValidMove(const char* destination, ChessPiece* board[][8]);
   };
 
 }

@@ -9,7 +9,7 @@ namespace chess {
     King(const char* position, bool white);
     bool isValidMove(const char* destination, ChessPiece* board[][8]);
   private:
-
+    void printName();
   };
 
 }

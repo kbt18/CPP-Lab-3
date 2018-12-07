@@ -10,7 +10,7 @@ namespace chess {
 
     bool isValidMove(const char* destination, ChessPiece* board[][8]); //can be private?
   private:
-
+    void printName();
   };
 
 }

@@ -14,6 +14,8 @@ namespace chess {
   }
 
   bool Knight::isValidMove(const char* destination, ChessPiece* board[][8]) {
+    printName();
+
     if (isSameDiag(destination))
       return false;
     if (isSameFile(destination))
@@ -30,6 +32,13 @@ namespace chess {
       return false;
 
     return true;
+  }
+
+  void Knight::printName() {
+    if (isWhite_)
+      std::cout << "White's Knight ";
+    else
+      std::cout << "Black's Knight ";
   }
 
 }

@@ -13,6 +13,8 @@ namespace chess {
   }
 
   bool Rook::isValidMove(const char* destination, ChessPiece* board[][8]) {
+    printName();
+
     if (!ChessPiece::isValidMove(destination, board))
       return false;
 
@@ -20,6 +22,13 @@ namespace chess {
       return false;
 
     return true;
+  }
+
+  void Rook::printName() {
+    if (isWhite_)
+      std::cout << "White's Rook ";
+    else
+      std::cout << "Black's Rook ";
   }
 
 }

@@ -15,21 +15,18 @@ namespace chess {
 
   class ChessBoard {
   public:
-    friend class ChessPiece;
     ChessBoard();
     void submitMove(const char* source, const char* destination);
-    bool isValidMove(const char* source, const char* destination);
     void displayBoard();
     void resetBoard();
-    bool isOccupied(const char* position);
   private:
+    bool isValidMove(const char* source, const char* destination);
+    bool isOccupied(const char* position);
     void changeTurn();
     bool isWhiteTurn_;
     bool isKingInCheck_;
-    bool isKingInCheck();
-    bool isKingInCheckMate();
-    bool moveCouldTakeKing(const char* source);
-    bool moveUnchecksKing(const char* source);
+    bool isKingInCheck(int& a, int& b);
+    bool moveCouldTakeKing(const char* source, int& i, int& j);
     void makeMove(const char* source, const char* destination);
     ChessPiece* board_[8][8];
   };

@@ -5,6 +5,8 @@ namespace chess {
   Pawn::Pawn(const char* position, bool white) : ChessPiece(position, white), is_first_move_(true) {}
 
   bool Pawn::isValidMove(const char* destination, ChessPiece* board[][8]) {
+    printName();
+
     if (!ChessPiece::isValidMove(destination, board))
       return false;
 
@@ -69,5 +71,12 @@ namespace chess {
   void Pawn::setPosition(const char* p) {
     ChessPiece::setPosition(p);
     is_first_move_ = false;
+  }
+
+  void Pawn::printName() {
+    if (isWhite_)
+      std::cout << "White's Pawn ";
+    else
+      std::cout << "Black's Pawn ";
   }
 }

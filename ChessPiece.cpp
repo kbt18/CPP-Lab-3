@@ -9,7 +9,7 @@ namespace chess {
     if (isValidPosition(position))
       strcpy(position_, position);
     else {
-      cerr << "invalid position\n";
+      //cerr << "invalid position\n";
       throw(-1);
     }
     if (white == 0) {
@@ -29,12 +29,12 @@ namespace chess {
 
     if (!(isSameRank(destination) || isSameFile(destination) ||
       isSameDiag(destination))) {
-        cerr << "not same rank, file or diagonal\n";
+        //cerr << "not same rank, file or diagonal\n";
         return false;
     }
 
     if (isBlocked(destination, board)) {
-      cerr << "piece is blocking move\n";
+      //cerr << "piece is blocking move\n";
       return false;
     }
 
@@ -42,21 +42,21 @@ namespace chess {
   }
 
   bool ChessPiece::isBlocked(const char* destination, ChessPiece* board[][8]) {
-    cerr << "piece position is " << position_ << endl;
+    //cerr << "piece position is " << position_ << endl;
     if (isSameRank(destination)) {
-      cerr << "file move\n";
+      //cerr << "file move\n";
       if (isBlockedAlongRank(destination, board))
         return true;
     }
 
     if (isSameFile(destination)) {
-      cerr << "rank move\n";
+      //cerr << "rank move\n";
       if (isBlockedAlongFile(destination, board))
         return true;
     }
 
     if (isSameDiag(destination)) {
-      cerr << "Diagonal move\n";
+      //cerr << "Diagonal move\n";
       if (isBlockedAlongDiag(destination, board))
         return true;
     }
@@ -171,5 +171,7 @@ namespace chess {
 
     return true;
   }
+
+  void ChessPiece::printName() {}
 
 }
