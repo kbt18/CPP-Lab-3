@@ -1,36 +1,32 @@
 
 
-namespace chess {
+bool isValidPosition(const char* position) {
+  int char_count = 0;
+  while (position[char_count] != '\0')
+    char_count++;
 
-  bool isValidPosition(const char* position) {
-    int char_count = 0;
-    while (position[char_count] != '\0')
-      char_count++;
+  if (char_count != 2)
+    return false;
 
-    if (char_count != 2)
-      return false;
+  if (position[0] < 'A' || position[0] > 'H')
+    return false;
 
-    if (position[0] < 'A' || position[0] > 'H')
-      return false;
+  if (position[1] < '1' || position[1] > '8')
+    return false;
 
-    if (position[1] < '1' || position[1] > '8')
-      return false;
+  return true;
+}
 
-    return true;
-  }
+int stringToRank(const char* position) {
+  return ((int)(position[1] - '1'));
+}
 
-  int stringToRank(const char* position) {
-    return ((int)(position[1] - '1'));
-  }
+int stringToFile(const char* position) {
+  return ((int)(position[0] - 'A'));
+}
 
-  int stringToFile(const char* position) {
-    return ((int)(position[0] - 'A'));
-  }
-
-  void swapValues(int& v1, int& v2) {
-    int temp = v1;
-    v1 = v2;
-    v2 = temp;
-  }
-
+void swapValues(int& v1, int& v2) {
+  int temp = v1;
+  v1 = v2;
+  v2 = temp;
 }

@@ -3,15 +3,13 @@
 
 #include "ChessPiece.h"
 
-namespace chess {
-  class Queen : public ChessPiece {
-  public:
-    Queen(const char* position, bool white);
-  private:
-    void printName();
-    bool isValidMove(const char* destination, ChessPiece* board[][8]);
-  };
+class Queen : public ChessPiece {
+public:
+  Queen(const char* position, bool white);
+private:
+  void printName();
+  bool isValidMove(const char* destination, ChessPiece* board[][8]);
+};
 
-}
 
 #endif

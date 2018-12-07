@@ -1,35 +1,30 @@
 #include "Bishop.h"
 
-
-namespace chess {
-
-  Bishop::Bishop(const char* position, bool white) : ChessPiece(position, white) {
-    if (white == 0) {
-      isWhite_ = false;
-      symbol_ = "♝";
-    } else {
-      isWhite_ = true;
-      symbol_ = "♗";
-    }
+Bishop::Bishop(const char* position, bool white) : ChessPiece(position, white) {
+  if (white == 0) {
+    isWhite_ = false;
+    symbol_ = "♝";
+  } else {
+    isWhite_ = true;
+    symbol_ = "♗";
   }
+}
 
-  bool Bishop::isValidMove(const char* destination, ChessPiece* board[][8]) {
-    printName();
-    
-    if (!ChessPiece::isValidMove(destination, board))
-      return false;
+bool Bishop::isValidMove(const char* destination, ChessPiece* board[][8]) {
+  printName();
 
-    if (!isSameDiag(destination))
-      return false;
+  if (!ChessPiece::isValidMove(destination, board))
+    return false;
 
-    return true;
-  }
+  if (!isSameDiag(destination))
+    return false;
 
-  void Bishop::printName() {
-    if (isWhite_)
-      std::cout << "White's Bishop ";
-    else
-      std::cout << "Black's Bishop ";
-  }
+  return true;
+}
 
+void Bishop::printName() {
+  if (isWhite_)
+    std::cout << "White's Bishop ";
+  else
+    std::cout << "Black's Bishop ";
 }
