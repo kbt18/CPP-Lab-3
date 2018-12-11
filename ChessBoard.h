@@ -18,9 +18,13 @@ public:
   void submitMove(const char* source, const char* destination);
   // source is the square of the piece you wish to move.
   // destination is the square where you wish to move the piece at source.
-  
+
   void displayBoard();
+  // Prints the board to the screen.
+
   void resetBoard();
+  // Resets the board and starts a new game of chess.
+
 private:
   void isValidMove(const char* source, const char* destination);
   bool isOccupied(const char* position);
