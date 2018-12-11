@@ -6,7 +6,7 @@ King::King(const char* position, bool white) : ChessPiece(position, white) {
   isKing_ = true;
   if (white == 0) {
     isWhite_ = false;
-    symbol_ = "♚"; // colours are wrong way round
+    symbol_ = "♚"; 
   } else {
     isWhite_ = true;
     symbol_ = "♔";
@@ -14,7 +14,6 @@ King::King(const char* position, bool white) : ChessPiece(position, white) {
 }
 
 bool King::isValidMove(const char* destination, ChessPiece* board[][8]) {
-  printName();
 
   if (!ChessPiece::isValidMove(destination, board))
     return false;

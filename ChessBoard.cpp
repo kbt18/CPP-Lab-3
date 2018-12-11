@@ -34,7 +34,14 @@ void ChessBoard::displayBoard() {
 
 void ChessBoard::submitMove(const char* source, const char* destination) {
 
-  if (isValidMove(source, destination)) {
+  int i_src, j_src;
+  int a = 0, b = 0;
+
+  try {
+    isValidMove(source, destination);
+    i_src = stringToRank(source);
+    j_src = stringToFile(source);
+    board_[i_src][j_src]->printName();
     cout << "moves from " << source << " to " << destination;
     if (!isOccupied(destination))
       cout << endl;
@@ -45,8 +52,42 @@ void ChessBoard::submitMove(const char* source, const char* destination) {
       board_[i][j]->printName();
       cout << endl;
     }
-    makeMove(source, destination);
+
+    if (!isWhiteInCheck_ && !isBlackInCheck_) {
+      makeMove(source, destination);
+      if (isKingInCheck(a, b)) {
+        if (isWhiteInCheck_)
+          cout << "White is in check\n";
+       else
+          cout << "Black is in check\n";
+      }
+    } else {
+      makeMove(source, destination);
+      isKingInCheck(a, b);
+    }
+
     changeTurn();
+  } catch (int i) {
+    if (i == 1)
+      cout << "Invalid board position!\n";
+    if (i == 2)
+      cout << "Destination cannot equal source!\n";
+    if (i == 3)
+      cout << "There is no piece at position " << source << "!\n";
+    if (i == 4)
+      cout << "It is not Black's turn to move!\n";
+    if (i == 5)
+      cout << "It is not White's turn to move!\n";
+    if (i == 6) {
+      i_src = stringToRank(source);
+      j_src = stringToFile(source);
+      board_[i_src][j_src]->printName();
+      cout << "cannot move to " << destination << "!\n";
+    }
+    if (i == 7)
+      cout << "Can not take own pieces!\n";
+    if (i == 8)
+      cout << "Can not put self in check!\n";
   }
 }
 
@@ -66,53 +107,37 @@ bool ChessBoard::isOccupied(const char* position) {
   return true;
 }
 
-bool ChessBoard::isValidMove(const char* source, const char* destination) {
-  if (!isValidPosition(source)) {
-    cout << "Source is not valid!\n";
-    return false;
-  }
+void ChessBoard::isValidMove(const char* source, const char* destination) {
+  if (!isValidPosition(source))
+    throw INVALID_BOARD_POSITION;
 
-  if (!isValidPosition(destination)) {
-    cout << "Destination is not valid!\n";
-    return false;
-  }
+  if (!isValidPosition(destination))
+    throw INVALID_BOARD_POSITION;
 
-  if (strcmp(destination, source) == 0) {
-    cout << "Destination cannot equal source!\n";
-    return false;
-  }
 
-  if (!isOccupied(source)) {
-    cerr << "There is no piece at position " << source << "!\n";
-    return false;
-  }
+  if (strcmp(destination, source) == 0)
+    throw SAME_DESTINATION_AS_SOURCE;
+
+  if (!isOccupied(source))
+    throw NO_PIECE_AT_SOURCE;
 
   int i_src = stringToRank(source);
   int j_src = stringToFile(source);
 
-  if (isWhiteTurn_ && !board_[i_src][j_src]->isWhite_) {
-    cout << "It is not Black's turn to move!\n";
-    return false;
-  } else if (!isWhiteTurn_ && board_[i_src][j_src]->isWhite_) {
-    cout << "It is not White's turn to move!\n";
-    return false;
-  }
+  if (isWhiteTurn_ && !board_[i_src][j_src]->isWhite_)
+    throw NOT_BLACK_TURN;
+  else if (!isWhiteTurn_ && board_[i_src][j_src]->isWhite_)
+    throw NOT_WHITE_TURN;
 
-
-  if (!board_[i_src][j_src]->isValidMove(destination, board_)) {
-    cout << "cannot move to " << destination << "!\n";
-    return false;
-  }
+  if (!board_[i_src][j_src]->isValidMove(destination, board_))
+    throw ILLEGAL_MOVE;
 
   int i_dest = stringToRank(destination);
   int j_dest = stringToFile(destination);
   if (isOccupied(destination))
-    if (board_[i_src][j_src]->isWhite_ == board_[i_dest][j_dest]->isWhite_) {
-      cerr << "cannot take own pieces\n";
-      return false;
-    }
+    if (board_[i_src][j_src]->isWhite_ == board_[i_dest][j_dest]->isWhite_)
+      throw TAKING_OWN_PIECE;
 
-  return true;
 }
 
 void ChessBoard::makeMove(const char* source, const char* destination) {
@@ -132,6 +157,8 @@ void ChessBoard::resetBoard() {
   cout << "A new chess game is started!\n";
 
   isWhiteTurn_ = true;
+  isWhiteInCheck_ = false;
+  isBlackInCheck_ = false;
 
   for (int i = 0; i < 8; i++)
     for (int j = 0; j < 8; j++)
@@ -204,12 +231,18 @@ bool ChessBoard::moveCouldTakeKing(const char* source, int& i, int& j) {
       destination[2] = '\0';
       if (board_[i][j] != NULL)
         if (board_[i][j]->isKing_)
-          if (isValidMove(source, destination)) {
-            cout << "A king is in check!\n";
+          try {
+            isValidMove(source, destination);
+            if (board_[i][j]->isWhite_)
+              isWhiteInCheck_ = true;
+            else
+              isBlackInCheck_ = true;
             return true;
-          }
+          } catch (int i) {}
     }
   }
 
+  isWhiteInCheck_ = false;
+  isBlackInCheck_ = false;
   return false;
 }

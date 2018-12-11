@@ -6,8 +6,9 @@
 class Pawn : public ChessPiece {
 public:
   Pawn(const char* position, bool white);
-  bool isValidMove(const char* destination, ChessPiece* board[][8]); //can be private?
+
 private:
+  bool isValidMove(const char* destination, ChessPiece* board[][8]); 
   void printName();
   bool is_first_move_;
   bool isTakingMove(const char* destination, ChessPiece* board[][8]);

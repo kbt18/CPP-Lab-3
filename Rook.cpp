@@ -3,7 +3,7 @@
 Rook::Rook(const char* position, bool white) : ChessPiece(position, white) {
   if (white == 0) {
     isWhite_ = false;
-    symbol_ = "♜"; // colours are wrong way round
+    symbol_ = "♜"; 
   } else {
     isWhite_ = true;
     symbol_ = "♖";
@@ -11,7 +11,6 @@ Rook::Rook(const char* position, bool white) : ChessPiece(position, white) {
 }
 
 bool Rook::isValidMove(const char* destination, ChessPiece* board[][8]) {
-  printName();
 
   if (!ChessPiece::isValidMove(destination, board))
     return false;

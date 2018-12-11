@@ -11,7 +11,6 @@ Bishop::Bishop(const char* position, bool white) : ChessPiece(position, white) {
 }
 
 bool Bishop::isValidMove(const char* destination, ChessPiece* board[][8]) {
-  printName();
 
   if (!ChessPiece::isValidMove(destination, board))
     return false;

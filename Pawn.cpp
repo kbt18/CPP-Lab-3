@@ -4,7 +4,6 @@
 Pawn::Pawn(const char* position, bool white) : ChessPiece(position, white), is_first_move_(true) {}
 
 bool Pawn::isValidMove(const char* destination, ChessPiece* board[][8]) {
-  printName();
 
   if (!ChessPiece::isValidMove(destination, board))
     return false;

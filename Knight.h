@@ -6,8 +6,8 @@
 class Knight : public ChessPiece {
 public:
   Knight(const char* position, bool white);
-  bool isValidMove(const char* destination, ChessPiece* board[][8]); //can be private?
 private:
+  bool isValidMove(const char* destination, ChessPiece* board[][8]);
   void printName();
 };
 

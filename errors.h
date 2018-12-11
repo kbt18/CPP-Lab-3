@@ -6,3 +6,4 @@
 #define NOT_WHITE_TURN                  5
 #define ILLEGAL_MOVE                    6
 #define TAKING_OWN_PIECE                7
+#define PUTTING_SELF_IN_CHECK           8

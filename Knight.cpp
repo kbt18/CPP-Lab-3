@@ -13,7 +13,6 @@ Knight::Knight(const char* position, bool white) : ChessPiece(position, white) {
 }
 
 bool Knight::isValidMove(const char* destination, ChessPiece* board[][8]) {
-  printName();
 
   if (isSameDiag(destination))
     return false;
